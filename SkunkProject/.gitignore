@@ -1,0 +1,7 @@
+/bin/
+.idea/
+SkunkProject.iml
+out/
+*.class
+.class
+*.class*
