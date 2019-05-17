@@ -87,6 +87,17 @@ public class SkunkController
 		return names;
 	}
 	
+	static int askForRounds()
+	{
+		int numRounds;
+		
+		StdOut.println("How many rounds would you like to play?");
+		numRounds = StdIn.readInt();
+		
+		return numRounds;
+		
+	}
+	
 
 	
 }

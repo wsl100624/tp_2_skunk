@@ -4,6 +4,7 @@ import java.util.*;
 public class SkunkApp 
 {
 	static Round round = new Round();
+	static Player gameWinner = null;
 	
 	public static void addPlayers(ArrayList<String> names)
 	{
@@ -18,6 +19,7 @@ public class SkunkApp
 		StdOut.println("Welcome to Skunk");
 		
 		ArrayList<String> playerNames;
+		int numRounds = 0;
 		boolean isSkunk = false;
 			
 		playerNames = SkunkController.initializePlayers();
@@ -25,44 +27,69 @@ public class SkunkApp
 		
 		round.listOutPlayers();
 		
-		while(!round.isRoundComplete())
+		numRounds = SkunkController.askForRounds();
+		for(int cnt = 0; cnt < numRounds; cnt++)
 		{
-			if (SkunkController.startSkunk(round.getPlayerTurnName())) 
+			while(!round.isRoundComplete())
 			{
-				isSkunk = round.roundPlay();
-	
-				if (isSkunk) 
+				if (SkunkController.startSkunk(round.getPlayerTurnName())) 
+				{
+					isSkunk = round.roundPlay();
+		
+					if (isSkunk) 
+					{
+						round.switchTurns(isSkunk);
+					}
+					else 
+					{
+						while (SkunkController.continueTurn(round.getPlayerTurnName()) && !round.isRoundComplete())
+						{
+							isSkunk = round.roundPlay();
+		
+							if (isSkunk) 
+							{
+								break;
+							}
+						}
+		
+						round.switchTurns(isSkunk);
+					}					
+				} 
+				else 
 				{
 					round.switchTurns(isSkunk);
 				}
-				else 
-				{
-					while (SkunkController.continueTurn(round.getPlayerTurnName()) && !round.isRoundComplete())
-					{
-						isSkunk = round.roundPlay();
-	
-						if (isSkunk) 
-						{
-							break;
-						}
-					}
-	
-					round.switchTurns(isSkunk);
-				}					
-			} 
-			else 
-			{
-				round.switchTurns(isSkunk);
+				
+				isSkunk = false;	
 			}
 			
-			isSkunk = false;	
+			StdOut.println(round.roundWinner.toString() + " is the winner!!!!");
+			StdOut.println(round.roundWinner.toString() + " wins with a score of " + round.roundWinner.getOverallScore() + 
+					" and has an overall chip score of " + round.roundWinner.getChipScore() + " and collected " + round.getChipsFromOthers() + 
+					" chips from the other players");
+			StdOut.println("The kitty had " + Round.getKittyPot() + " chips in it");
+			
+			round.resetRound();
+			Round.resetKitty();
+			if(!(cnt == numRounds - 1))
+			{
+				StdOut.println("STARTING NEW ROUND!");
+			}
+			else
+			{
+				StdOut.println("ROUNDS DONE DETERMINING GAME WINNER");
+			}
+			
+			StdOut.println("");
+			StdOut.println("");
+			StdOut.println("");
+			round.displayScores();
+			StdOut.println("");
+			StdOut.println("");
+			StdOut.println("");
 		}
-		
-		StdOut.println(round.roundWinner.toString() + " is the winner!!!!");
-		StdOut.println(round.roundWinner.toString() + " wins with a score of " + round.roundWinner.getOverallScore() + 
-				" and has an overall chip score of " + round.roundWinner.getChipScore() + " and collected " + round.getChipsFromOthers() + 
-				" chips from the other players");
-		StdOut.println("The kitty had " + Round.getKittyPot() + " chips in it");
+		gameWinner = round.determineGameWinner();
+		StdOut.println(gameWinner.toString() + " IS THE WINNER!! WITH CHIP SCORE OF " + gameWinner.getChipScore());	
 		
 	}
 

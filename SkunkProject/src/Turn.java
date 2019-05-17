@@ -30,7 +30,18 @@ public class Turn
 		roll = new Roll(predictableRolls);
 	}
 
-
+	public void resetTurn()
+	{
+		resetRollScores();
+	}
+	
+	private void resetRollScores()
+	{
+		for(int cnt = 0; cnt < rollScores.length; cnt++)
+		{
+			rollScores[cnt] = 0;
+		}
+	}
 	
 	///round
 	boolean turnPlay(Player player)
@@ -136,6 +147,7 @@ public class Turn
 
 			//reset stuff
 			this.count = 0;
+			resetRollScores();
 
 			StdOut.println(this.player.name + ", your overall score is " + this.player.getOverallScore());
 			StdOut.println("Your chips you have left is " + player.getChipScore());
