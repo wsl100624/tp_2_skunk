@@ -1,3 +1,4 @@
+import edu.princeton.cs.introcs.StdOut;
 
 public class Player 
 {
@@ -60,6 +61,15 @@ public class Player
 		this.chipScore = 50;
 	}
 	
+	public void showScores()
+	{
+		StdOut.println(this.toString() + "'s score is: ");
+		StdOut.println("\tchip score: " + this.chipScore);
+		StdOut.println("\troll score: " + this.rollScore);
+		StdOut.println("\tturn score: " + this.turnScore);
+		StdOut.println("\tOverall score: " + this.overallScore);
+	}
+	
 	void paySingleSkunk()
 	{
 		this.chipScore = this.chipScore - 1;
@@ -78,6 +88,14 @@ public class Player
 		Round.doubleSkunk();
 		this.overallScore = 0;
 	}
+	
+	public void resetPlayer()
+	{
+		this.overallScore = 0;
+		this.rollScore = 0;
+		this.turnScore = 0;
+	}
+	
 	
 	@Override
 	public  String toString()

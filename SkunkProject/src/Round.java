@@ -151,6 +151,45 @@ public class Round {
 		return false;
 	}
 	
+	public void resetRound()
+	{
+		this.roundComplete = false;
+		this.lastTurns = false;
+		
+		this.firstPotentialWinner = null;
+		this.oldPotentialWinner = null;
+		this.potentialWinner = null;
+		this.roundWinner = null;
+		
+		this.chipsFromOthers = 0;
+		this.winningScore = 0;
+		this.turnTracker = 0;
+		
+		turn.resetTurn();
+		resetPlayers();		
+	}
+	
+	public void displayScores()
+	{
+		for (Player player : playerList)
+		{
+			player.showScores();
+		}
+	}
+	
+	private void resetPlayers()
+	{
+		for (Player player : playerList)
+		{
+			player.resetPlayer();
+		}
+	}
+	
+	public static void resetKitty()
+	{
+		kittyPot = 0;
+	}
+	
 	private void checkForOtherWinner()
 	{
 		if(playerList.get(turnTracker).getOverallScore() > firstPotentialWinner.getOverallScore() && oldPotentialWinner == null)
@@ -201,6 +240,31 @@ public class Round {
 				}
 			}
 		}
+	}
+	
+	public Player determineGameWinner()
+	{
+		Player winner = null;
+		int chipScoreToBeat = 0;
+		
+		for(int cnt = 0; cnt < playerList.size(); cnt++)
+		{
+			if(cnt == 0)
+			{
+				winner = playerList.get(cnt);
+				chipScoreToBeat = winner.getChipScore();
+			}
+			else
+			{
+				if(playerList.get(cnt).getChipScore() >= chipScoreToBeat)
+				{
+					winner = playerList.get(cnt);
+					chipScoreToBeat = winner.getChipScore();
+				}
+			}			
+		}
+		
+		return winner;
 	}
 	
 }
