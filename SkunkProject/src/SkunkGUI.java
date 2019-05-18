@@ -23,12 +23,11 @@ public class SkunkGUI extends Application {
     
     @Override
     public void start(Stage stage) throws IOException
-    {
-    	
+    {   	
     	// Create the FXMLLoader 
         FXMLLoader loader = new FXMLLoader();
         // Path to the FXML File
-        String fxmlDocPath = "C:/Users/Soujirou152/git/tp_2_skunk/SkunkProject/src/SkunkGUI.fxml";
+        String fxmlDocPath = getClass().getResource("SkunkGUI.fxml").toString().substring(5);
         FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
          
         // Create the Pane and all Details
