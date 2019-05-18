@@ -12,6 +12,16 @@ public class PlayerTest {
     public void setup() throws Exception {
         player = new Player("TestPlayer");
     }
+    
+    @Test
+    public void winTheRound() {
+        Round round = new Round();
+        int kittyChips = KittyPot.getKittyChips();
+        int playerScore = player.getChipScore();
+        player.winTheRound();
+        assertEquals(kittyChips + playerScore,player.getChipScore());
+
+    }
 
     @Test
     public void setChipScore() {
@@ -78,13 +88,8 @@ public class PlayerTest {
         assertEquals("TestPlayer", player.toString());
     }
 
-    @Test
-    public void winTheRound() {
-        Round round = new Round();
-        player.winTheRound();
-        assertEquals(50,player.getChipScore());
 
-    }
+
     
     @Test
     public void resetPlayer() {
@@ -93,11 +98,5 @@ public class PlayerTest {
     	assertEquals(0, player.getRollScore());
     	assertEquals(0, player.getTurnScore());
     }
-    
-    @Test
-    public void showScore() {
-    	player.showScores();
-    }
         
-    
 }

@@ -8,7 +8,7 @@ public class Round {
 
 	private int turnTracker;
 	
-	private static int kittyPot;
+	public KittyPot kittyPot;
 	
 	private int chipsFromOthers = 0;
 	public int getChipsFromOthers()
@@ -16,12 +16,12 @@ public class Round {
 		return chipsFromOthers;
 	}
 	
-	static int getKittyPot()
-	{
-		return kittyPot;
-	}
-	
 	private ArrayList<Player> playerList = new ArrayList<Player>();
+	
+	ArrayList<Player> getPlayerList()
+	{
+		return playerList;
+	}
 	
 	private boolean roundComplete = false;
 	boolean isRoundComplete() {
@@ -36,9 +36,9 @@ public class Round {
 	private boolean lastTurns = false;
 	
 	Player roundWinner;
-	private Player firstPotentialWinner;
-	private Player potentialWinner;
-	private Player oldPotentialWinner;
+	public Player firstPotentialWinner;
+	public Player potentialWinner;
+	public Player oldPotentialWinner;
 	
 	private int scoreToBeat;
 	int winningScore;
@@ -46,8 +46,22 @@ public class Round {
 
 	public Round()
 	{
-		kittyPot = 0;
+		kittyPot = new KittyPot();
 		turn = new Turn();
+		turnTracker = 0;
+	}
+	
+	public Round(int[] predictDice)
+	{
+		kittyPot = new KittyPot();
+		turn = new Turn(predictDice);
+		turnTracker = 0;
+	}
+	
+	public Round(int[] predict1, int[] predict2)
+	{
+		kittyPot = new KittyPot();
+		turn = new Turn(predict1, predict2);
 		turnTracker = 0;
 	}
 
@@ -73,12 +87,42 @@ public class Round {
 		playerList.add(newPlayer);
 	}
 	
+	public int getDie1()
+	{
+		return turn.roll.getCurrRollDie1();
+	}
+	
+	public int getDie2()
+	{
+		return turn.roll.getCurrRollDie2();
+	}
+	
+	public int getCurrRoll()
+	{
+		return turn.roll.getCurrRoll();
+	}
+	
+	public boolean getSingleSkunk()
+	{
+		return turn.isSingleSkunk();
+	}
+	
+	public boolean getDoubleSkunk()
+	{
+		return turn.isDoubleSkunk();
+	}
+	
+	public boolean getSkunkDeuce()
+	{
+		return turn.isSkunkDeuce();
+	}
+	
 	public boolean roundPlay()
 	{
 		isSkunk = turn.turnPlay(getPlayerTurn());
 		return isSkunk;	
 	}
-	
+	 
 	public void switchTurns(boolean isSkunk)
 	{
 			turn.endTurn(isSkunk);
@@ -104,6 +148,15 @@ public class Round {
 			
 	}
 	
+	public Player lastPlayerTurn()
+	{
+		if(turnTracker == 0)
+		{
+			return playerList.get(playerList.size()-1);
+		}
+		return playerList.get(turnTracker - 1);
+	}
+	
 	public void listOutPlayers()
 	{
 		for(Player p: playerList)
@@ -122,24 +175,9 @@ public class Round {
 		return playerList.get(turnTracker).toString();
 	}
 	
-	public static void singleSkunk()
-	{
-		kittyPot = kittyPot + 1;
-	}
-	
-	public static void skunkDeuce()
-	{
-		kittyPot = kittyPot + 2;
-	}
-	
-	public static void doubleSkunk()
-	{
-		kittyPot = kittyPot + 4;
-	}
-	
 	public boolean checkForPotentialWinner()
 	{
-		if(playerList.get(turnTracker).getOverallScore() >= 100)
+		if(playerList.get(turnTracker).getOverallScore() >= Constants.SCORE_FOR_THE_WIN) //Refactor 2nd - make all the constants to a separate class to acheive 'High Cohesion'
 		{
 			firstPotentialWinner = playerList.get(turnTracker);
 			potentialWinner = firstPotentialWinner;
@@ -177,6 +215,17 @@ public class Round {
 		}
 	}
 	
+	public String chipAndOverAllRoundScore()
+	{
+		String scores = "";
+		for (Player player : playerList)
+		{
+			scores = scores + player.toString() + " \t Chip Score: " +
+				player.getChipScore() + "\t Overall Round Score: " + player.getOverallScore() + "\n";
+		}
+		return scores;
+	}
+	
 	private void resetPlayers()
 	{
 		for (Player player : playerList)
@@ -185,10 +234,6 @@ public class Round {
 		}
 	}
 	
-	public static void resetKitty()
-	{
-		kittyPot = 0;
-	}
 	
 	private void checkForOtherWinner()
 	{
@@ -222,7 +267,7 @@ public class Round {
 	
 	private void payRoundWinner()
 	{
-		for(int i = 0; i < playerList.size() - 1; i++)
+		for(int i = 0; i < playerList.size(); i++)
 		{
 			if(!(roundWinner.name.matches(playerList.get(i).name)))
 			{
@@ -232,7 +277,7 @@ public class Round {
 					roundWinner.setChipScore(10);
 					chipsFromOthers = chipsFromOthers + 10;
 				}
-				else if(playerList.get(i).getOverallScore() > 0)
+				else
 				{
 					playerList.get(i).setChipScore(-5);
 					roundWinner.setChipScore(5);

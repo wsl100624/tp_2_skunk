@@ -54,11 +54,12 @@ public class Player
 	Player(String name)
 	{
 		this.name = name;
+		
 		//starting score
 		this.overallScore = 0;
 		this.rollScore = 0;
 		this.turnScore = 0;
-		this.chipScore = 50;
+		this.chipScore = Constants.PLAYER_START_CHIPS; //Refactor 2nd - make all the constants to a separate class to acheive 'High Cohesion'
 	}
 	
 	public void showScores()
@@ -72,20 +73,20 @@ public class Player
 	
 	void paySingleSkunk()
 	{
-		this.chipScore = this.chipScore - 1;
-		Round.singleSkunk();
+		this.chipScore = this.chipScore - Constants.SINGLE_SKUNK_PENALTY;
+		KittyPot.addOneChip();
 	}
 	
 	void paySkunkDeuce()
 	{
-		this.chipScore = this.chipScore - 2;
-		Round.skunkDeuce();
+		this.chipScore = this.chipScore - Constants.DEUCE_SKUNK_PENALTY;
+		KittyPot.addTwoChips();
 	}
 	
 	void payDoubleSkunk()
 	{
-		this.chipScore = this.chipScore - 4;
-		Round.doubleSkunk();
+		this.chipScore = this.chipScore - Constants.DOUBLE_SKUNK_PENALTY;
+		KittyPot.addFourChips();
 		this.overallScore = 0;
 	}
 	
@@ -105,7 +106,7 @@ public class Player
 	
 	void winTheRound()
 	{
-		this.chipScore = this.chipScore + Round.getKittyPot();
+		this.chipScore = this.chipScore + KittyPot.getKittyChips();
 	}
 
 }

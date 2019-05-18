@@ -2,7 +2,7 @@ import edu.princeton.cs.introcs.StdOut;
 
 public class Turn 
 {
-	private Roll roll;
+	public Roll roll;
 	
 	private Player player;
 
@@ -13,6 +13,33 @@ public class Turn
 	private boolean singleSkunk = false;
 	private boolean skunkDeuce = false;
 	private boolean doubleSkunk = false;
+	
+	
+
+	public boolean isSingleSkunk() {
+		return singleSkunk;
+	}
+
+	public void setSingleSkunk(boolean singleSkunk) {
+		this.singleSkunk = singleSkunk;
+	}
+
+	public boolean isSkunkDeuce() {
+		return skunkDeuce;
+	}
+
+	public void setSkunkDeuce(boolean skunkDeuce) {
+		this.skunkDeuce = skunkDeuce;
+	}
+
+	public boolean isDoubleSkunk() {
+		return doubleSkunk;
+	}
+
+	public void setDoubleSkunk(boolean doubleSkunk) {
+		this.doubleSkunk = doubleSkunk;
+	}
+
 
 	private int count = 0;
 	
@@ -28,6 +55,11 @@ public class Turn
 
 	Turn(int[] predictableRolls) {
 		roll = new Roll(predictableRolls);
+	}
+	
+	Turn(int[] pred1, int[] pred2)
+	{
+		roll = new Roll(pred1, pred2);
 	}
 
 	public void resetTurn()
@@ -47,17 +79,12 @@ public class Turn
 	boolean turnPlay(Player player)
 	{		
 		this.player = player;
-			
-		int die1Roll, die2Roll;
-		
+					
 		clearSkunks();
 		roll.roll();
 		
 		rollScores[count] = roll.getCurrRoll();
-		
-		die1Roll = roll.getCurrRollDie1();
-		die2Roll = roll.getCurrRollDie2();
-		
+			
 		if(roll.isSkunk())
 		{
 			singleSkunk = true;
@@ -76,7 +103,7 @@ public class Turn
 			skunk = doubleSkunk;
 		}
 
-		StdOut.println("You have rolled " + die1Roll + " + " + die2Roll + " = " + rollScores[count]);
+		//StdOut.println("You have rolled " + die1Roll + " + " + die2Roll + " = " + rollScores[count]);
 
 		player.setRollScore(rollScores[count]);
 
@@ -126,35 +153,41 @@ public class Turn
 			}
 			else
 			{
-				// penalties 1 skunk or 2 skunks
-				StdOut.println("You got a skunk! Your turn is ending!");
-				if(singleSkunk)
-				{
-					StdOut.println("You're skunk is a single skunk. You have to pay 1 chip to the kitty");
-					this.player.paySingleSkunk();
-				}
-				else if(skunkDeuce)
-				{
-					StdOut.println("You're skunk is a skunk deuce. You have to pay 2 chips to the kitty");
-					this.player.paySkunkDeuce();
-				}
-				else if(doubleSkunk)
-				{
-					StdOut.println("You're skunk is a double skunk. You have to pay 4 chips to the kitty and lose all your points!!");
-					this.player.payDoubleSkunk();
-				}
+				skunkPenalty();
 			}
 
 			//reset stuff
 			this.count = 0;
 			resetRollScores();
 
-			StdOut.println(this.player.name + ", your overall score is " + this.player.getOverallScore());
-			StdOut.println("Your chips you have left is " + player.getChipScore());
-			StdOut.println("The kitty's pot is " + Round.getKittyPot());
-			
-			StdOut.println("Passing to the next player");
+			showTurnSummary();
 		}
+	}
+
+	private void skunkPenalty() {
+		StdOut.println("You got a skunk! Your turn is ending!");
+		if(singleSkunk)
+		{
+			StdOut.println("You're skunk is a single skunk. You have to pay " + Constants.SINGLE_SKUNK_PENALTY + " chip to the kitty");
+			this.player.paySingleSkunk();
+		}
+		else if(skunkDeuce)
+		{
+			StdOut.println("You're skunk is a skunk deuce. You have to pay " + Constants.DEUCE_SKUNK_PENALTY + " chips to the kitty");
+			this.player.paySkunkDeuce();
+		}
+		else if(doubleSkunk)
+		{
+			StdOut.println("You're skunk is a double skunk. You have to pay " + Constants.DOUBLE_SKUNK_PENALTY + " chips to the kitty and lose all your points!!");
+			this.player.payDoubleSkunk();
+		}
+	}
+
+	private void showTurnSummary() {
+		StdOut.println(this.player.name + ", your overall score is " + this.player.getOverallScore());
+		StdOut.println("Your chips you have left is " + player.getChipScore());
+		StdOut.println("The kitty's pot is " + KittyPot.getKittyChips());
+		StdOut.println("Passing to the next player");
 	}
 	
 
