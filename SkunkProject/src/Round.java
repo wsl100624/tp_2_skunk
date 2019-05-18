@@ -8,17 +8,12 @@ public class Round {
 
 	private int turnTracker;
 	
-	private static int kittyPot;
+	public KittyPot kittyPot;
 	
 	private int chipsFromOthers = 0;
 	public int getChipsFromOthers()
 	{
 		return chipsFromOthers;
-	}
-	
-	static int getKittyPot()
-	{
-		return kittyPot;
 	}
 	
 	private ArrayList<Player> playerList = new ArrayList<Player>();
@@ -46,7 +41,7 @@ public class Round {
 
 	public Round()
 	{
-		kittyPot = 0;
+		kittyPot = new KittyPot();
 		turn = new Turn();
 		turnTracker = 0;
 	}
@@ -122,20 +117,24 @@ public class Round {
 		return playerList.get(turnTracker).toString();
 	}
 	
-	public static void singleSkunk()
-	{
-		kittyPot = kittyPot + 1;
-	}
-	
-	public static void skunkDeuce()
-	{
-		kittyPot = kittyPot + 2;
-	}
-	
-	public static void doubleSkunk()
-	{
-		kittyPot = kittyPot + 4;
-	}
+//	public static void singleSkunk()
+//	{
+//		kittyPot = kittyPot + 1;
+//	}
+//	
+//	public static void skunkDeuce()
+//	{
+//		kittyPot = kittyPot + 2;
+//	}
+//	
+//	public static void doubleSkunk()
+//	{
+//		kittyPot = kittyPot + 4;
+//	}
+//	public static void resetKitty()
+//	{
+//		kittyPot = 0;
+//	}
 	
 	public boolean checkForPotentialWinner()
 	{
@@ -185,10 +184,6 @@ public class Round {
 		}
 	}
 	
-	public static void resetKitty()
-	{
-		kittyPot = 0;
-	}
 	
 	private void checkForOtherWinner()
 	{

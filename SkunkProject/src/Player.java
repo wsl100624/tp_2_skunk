@@ -73,19 +73,19 @@ public class Player
 	void paySingleSkunk()
 	{
 		this.chipScore = this.chipScore - 1;
-		Round.singleSkunk();
+		KittyPot.addOneChip();
 	}
 	
 	void paySkunkDeuce()
 	{
 		this.chipScore = this.chipScore - 2;
-		Round.skunkDeuce();
+		KittyPot.addTwoChips();
 	}
 	
 	void payDoubleSkunk()
 	{
 		this.chipScore = this.chipScore - 4;
-		Round.doubleSkunk();
+		KittyPot.addFourChips();
 		this.overallScore = 0;
 	}
 	
@@ -105,7 +105,7 @@ public class Player
 	
 	void winTheRound()
 	{
-		this.chipScore = this.chipScore + Round.getKittyPot();
+		this.chipScore = this.chipScore + KittyPot.getKittyChips();
 	}
 
 }

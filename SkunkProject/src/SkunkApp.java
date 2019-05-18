@@ -67,10 +67,10 @@ public class SkunkApp
 			StdOut.println(round.roundWinner.toString() + " wins with a score of " + round.roundWinner.getOverallScore() + 
 					" and has an overall chip score of " + round.roundWinner.getChipScore() + " and collected " + round.getChipsFromOthers() + 
 					" chips from the other players");
-			StdOut.println("The kitty had " + Round.getKittyPot() + " chips in it");
+			StdOut.println("The kitty had " + KittyPot.getKittyChips() + " chips in it");
 			
 			round.resetRound();
-			Round.resetKitty();
+			KittyPot.clearKittyPot();
 			if(!(cnt == numRounds - 1))
 			{
 				StdOut.println("STARTING NEW ROUND!");

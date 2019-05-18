@@ -151,7 +151,7 @@ public class Turn
 
 			StdOut.println(this.player.name + ", your overall score is " + this.player.getOverallScore());
 			StdOut.println("Your chips you have left is " + player.getChipScore());
-			StdOut.println("The kitty's pot is " + Round.getKittyPot());
+			StdOut.println("The kitty's pot is " + KittyPot.getKittyChips());
 			
 			StdOut.println("Passing to the next player");
 		}
