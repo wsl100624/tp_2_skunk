@@ -5,10 +5,10 @@
     95% in overall 
 
 ## UML (Before)
-    ![](SkunkAppUML.png)
+    ![UML-before](SkunkAppUML.png)
 
 ## UML (After)
-    ![](UML-after.png)
+    ![UML-after](UML-after.png)
 
 ## Refactoring
      1. Low coupling 
