@@ -148,35 +148,41 @@ public class Turn
 			}
 			else
 			{
-				// penalties 1 skunk or 2 skunks
-				StdOut.println("You got a skunk! Your turn is ending!");
-				if(singleSkunk)
-				{
-					StdOut.println("You're skunk is a single skunk. You have to pay 1 chip to the kitty");
-					this.player.paySingleSkunk();
-				}
-				else if(skunkDeuce)
-				{
-					StdOut.println("You're skunk is a skunk deuce. You have to pay 2 chips to the kitty");
-					this.player.paySkunkDeuce();
-				}
-				else if(doubleSkunk)
-				{
-					StdOut.println("You're skunk is a double skunk. You have to pay 4 chips to the kitty and lose all your points!!");
-					this.player.payDoubleSkunk();
-				}
+				skunkPenalty();
 			}
 
 			//reset stuff
 			this.count = 0;
 			resetRollScores();
 
-			StdOut.println(this.player.name + ", your overall score is " + this.player.getOverallScore());
-			StdOut.println("Your chips you have left is " + player.getChipScore());
-			StdOut.println("The kitty's pot is " + Round.getKittyPot());
-			
-			StdOut.println("Passing to the next player");
+			showTurnSummary();
 		}
+	}
+
+	private void skunkPenalty() {
+		StdOut.println("You got a skunk! Your turn is ending!");
+		if(singleSkunk)
+		{
+			StdOut.println("You're skunk is a single skunk. You have to pay " + Constants.SINGLE_SKUNK_PENALTY + " chip to the kitty");
+			this.player.paySingleSkunk();
+		}
+		else if(skunkDeuce)
+		{
+			StdOut.println("You're skunk is a skunk deuce. You have to pay " + Constants.DEUCE_SKUNK_PENALTY + " chips to the kitty");
+			this.player.paySkunkDeuce();
+		}
+		else if(doubleSkunk)
+		{
+			StdOut.println("You're skunk is a double skunk. You have to pay " + Constants.DOUBLE_SKUNK_PENALTY + " chips to the kitty and lose all your points!!");
+			this.player.payDoubleSkunk();
+		}
+	}
+
+	private void showTurnSummary() {
+		StdOut.println(this.player.name + ", your overall score is " + this.player.getOverallScore());
+		StdOut.println("Your chips you have left is " + player.getChipScore());
+		StdOut.println("The kitty's pot is " + KittyPot.getKittyChips());
+		StdOut.println("Passing to the next player");
 	}
 	
 
