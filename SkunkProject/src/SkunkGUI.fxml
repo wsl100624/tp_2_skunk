@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SkunkGUIController">
+   <children>
+      <Button id="enterBtn" fx:id="onDataEntered" layoutX="464.0" layoutY="674.0" mnemonicParsing="false" onAction="#onDataEntered" text="Enter" />
+      <TextField id="enterOptionsTf" fx:id="enterOptionsTf" layoutX="315.0" layoutY="674.0" />
+      <Button id="rtdBtn" fx:id="rtdBtn" layoutX="315.0" layoutY="711.0" mnemonicParsing="false" onAction="#rollTheDice" prefHeight="25.0" prefWidth="149.0" text="ROLL THE DICE" />
+      <Button id="passBtn" fx:id="passBtn" layoutX="472.0" layoutY="711.0" mnemonicParsing="false" onAction="#noToRollTheDice" text="Pass" />
+      <Label id="scoreBoardLbl" fx:id="scoreBoardLbl" layoutX="198.0" layoutY="6.0" prefHeight="17.0" prefWidth="75.0" text="Score Board!" textAlignment="CENTER" />
+      <Label id="gameInfoLbl" fx:id="gameInfoLbl" layoutX="615.0" layoutY="6.0" prefHeight="17.0" prefWidth="105.0" text="Game Information" textAlignment="CENTER" />
+      <Label fx:id="scoreBoardLbl1" alignment="TOP_LEFT" layoutX="24.0" layoutY="32.0" prefHeight="642.0" prefWidth="423.0" wrapText="true" />
+      <TextArea fx:id="gameInfoTA" layoutX="464.0" layoutY="32.0" prefHeight="629.0" prefWidth="423.0" />
+   </children>
+</AnchorPane>

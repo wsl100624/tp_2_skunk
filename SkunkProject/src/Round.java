@@ -18,6 +18,11 @@ public class Round {
 	
 	private ArrayList<Player> playerList = new ArrayList<Player>();
 	
+	ArrayList<Player> getPlayerList()
+	{
+		return playerList;
+	}
+	
 	private boolean roundComplete = false;
 	boolean isRoundComplete() {
 		return roundComplete;
@@ -31,9 +36,9 @@ public class Round {
 	private boolean lastTurns = false;
 	
 	Player roundWinner;
-	private Player firstPotentialWinner;
-	private Player potentialWinner;
-	private Player oldPotentialWinner;
+	public Player firstPotentialWinner;
+	public Player potentialWinner;
+	public Player oldPotentialWinner;
 	
 	private int scoreToBeat;
 	int winningScore;
@@ -68,12 +73,42 @@ public class Round {
 		playerList.add(newPlayer);
 	}
 	
+	public int getDie1()
+	{
+		return turn.roll.getCurrRollDie1();
+	}
+	
+	public int getDie2()
+	{
+		return turn.roll.getCurrRollDie2();
+	}
+	
+	public int getCurrRoll()
+	{
+		return turn.roll.getCurrRoll();
+	}
+	
+	public boolean getSingleSkunk()
+	{
+		return turn.isSingleSkunk();
+	}
+	
+	public boolean getDoubleSkunk()
+	{
+		return turn.isDoubleSkunk();
+	}
+	
+	public boolean getSkunkDeuce()
+	{
+		return turn.isSkunkDeuce();
+	}
+	
 	public boolean roundPlay()
 	{
 		isSkunk = turn.turnPlay(getPlayerTurn());
 		return isSkunk;	
 	}
-	
+	 
 	public void switchTurns(boolean isSkunk)
 	{
 			turn.endTurn(isSkunk);
@@ -84,7 +119,7 @@ public class Round {
 			}
 			else if(lastTurns && !(getPlayerTurn().name.matches(firstPotentialWinner.toString())))
 			{
-				checkForOtherWinner();;
+				checkForOtherWinner();
 			}
 			
 			incrementTurnTracker();
@@ -97,6 +132,15 @@ public class Round {
 				roundWinner.winTheRound();
 			}
 			
+	}
+	
+	public Player lastPlayerTurn()
+	{
+		if(turnTracker == 0)
+		{
+			return playerList.get(playerList.size()-1);
+		}
+		return playerList.get(turnTracker - 1);
 	}
 	
 	public void listOutPlayers()
@@ -157,6 +201,17 @@ public class Round {
 		}
 	}
 	
+	public String chipAndOverAllRoundScore()
+	{
+		String scores = "";
+		for (Player player : playerList)
+		{
+			scores = scores + player.toString() + " \t Chip Score: " +
+				player.getChipScore() + "\t Overall Round Score: " + player.getOverallScore() + "\n";
+		}
+		return scores;
+	}
+	
 	private void resetPlayers()
 	{
 		for (Player player : playerList)
@@ -208,7 +263,7 @@ public class Round {
 					roundWinner.setChipScore(10);
 					chipsFromOthers = chipsFromOthers + 10;
 				}
-				else if(playerList.get(i).getOverallScore() > 0)
+				else
 				{
 					playerList.get(i).setChipScore(-5);
 					roundWinner.setChipScore(5);

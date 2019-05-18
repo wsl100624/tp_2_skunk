@@ -2,7 +2,7 @@ import edu.princeton.cs.introcs.StdOut;
 
 public class Turn 
 {
-	private Roll roll;
+	public Roll roll;
 	
 	private Player player;
 
@@ -13,6 +13,33 @@ public class Turn
 	private boolean singleSkunk = false;
 	private boolean skunkDeuce = false;
 	private boolean doubleSkunk = false;
+	
+	
+
+	public boolean isSingleSkunk() {
+		return singleSkunk;
+	}
+
+	public void setSingleSkunk(boolean singleSkunk) {
+		this.singleSkunk = singleSkunk;
+	}
+
+	public boolean isSkunkDeuce() {
+		return skunkDeuce;
+	}
+
+	public void setSkunkDeuce(boolean skunkDeuce) {
+		this.skunkDeuce = skunkDeuce;
+	}
+
+	public boolean isDoubleSkunk() {
+		return doubleSkunk;
+	}
+
+	public void setDoubleSkunk(boolean doubleSkunk) {
+		this.doubleSkunk = doubleSkunk;
+	}
+
 
 	private int count = 0;
 	
@@ -47,17 +74,12 @@ public class Turn
 	boolean turnPlay(Player player)
 	{		
 		this.player = player;
-			
-		int die1Roll, die2Roll;
-		
+					
 		clearSkunks();
 		roll.roll();
 		
 		rollScores[count] = roll.getCurrRoll();
-		
-		die1Roll = roll.getCurrRollDie1();
-		die2Roll = roll.getCurrRollDie2();
-		
+			
 		if(roll.isSkunk())
 		{
 			singleSkunk = true;
@@ -76,7 +98,7 @@ public class Turn
 			skunk = doubleSkunk;
 		}
 
-		StdOut.println("You have rolled " + die1Roll + " + " + die2Roll + " = " + rollScores[count]);
+		//StdOut.println("You have rolled " + die1Roll + " + " + die2Roll + " = " + rollScores[count]);
 
 		player.setRollScore(rollScores[count]);
 
