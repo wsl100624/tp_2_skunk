@@ -5,11 +5,9 @@
     95% in overall 
 
 ## UML (Before)
-    
-    ![UML-before](SkunkAppUML.png)
+   ![UML-before](SkunkAppUML.png)
 
-## UML (After)
-   
+## UML (After)   
    ![UML-after](UML-after.png)
 
 ## Refactoring
