@@ -1,14 +1,13 @@
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import edu.princeton.cs.introcs.StdOut;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sun.applet.Main;
 
 public class SkunkGUI extends Application {
 	
@@ -25,13 +24,12 @@ public class SkunkGUI extends Application {
     public void start(Stage stage) throws IOException
     {   	
     	// Create the FXMLLoader 
-        FXMLLoader loader = new FXMLLoader();
-        // Path to the FXML File
-        String fxmlDocPath = getClass().getResource("SkunkGUI.fxml").toString().substring(5);
-        FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/SkunkGUI.fxml"));
          
         // Create the Pane and all Details
-        AnchorPane root = (AnchorPane) loader.load(fxmlStream);
+
+    	AnchorPane root = (AnchorPane) loader.load();
+
         skunkGUI = loader.getController();
         skunkEngine = new SkunkEngine(skunkGUI);
         skunkGUI.setEngine(skunkEngine);
