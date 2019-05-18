@@ -253,7 +253,7 @@ public class Round {
 	
 	private void payRoundWinner()
 	{
-		for(int i = 0; i < playerList.size() - 1; i++)
+		for(int i = 0; i < playerList.size(); i++)
 		{
 			if(!(roundWinner.name.matches(playerList.get(i).name)))
 			{

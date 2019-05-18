@@ -17,7 +17,7 @@ public class SkunkEngine {
 	int numPlyEntered = 1;
 	int numPlayers = 0;
 	int numRounds = 0;
-	int roundsPassed = 0;
+	int roundsPassed = 1;
 	ArrayList<String> playerNames = new ArrayList<String>();
 	
 	public SkunkEngine(SkunkGUIController gui)
@@ -54,15 +54,18 @@ public class SkunkEngine {
 				gui.setTextOnGameInfo("You got a skunk! Your turn is ending!");
 				if(round.getSingleSkunk())
 				{
-					gui.setTextOnGameInfo("You're skunk is a single skunk. You have to pay 1 chip to the kitty");
+					gui.setTextOnGameInfo("You're skunk is a single skunk. You have to pay " + 
+										Constants.SINGLE_SKUNK_PENALTY +  " chip to the kitty");
 				}
 				else if(round.getSkunkDeuce())
 				{
-					gui.setTextOnGameInfo("You're skunk is a skunk deuce. You have to pay 2 chips to the kitty");
+					gui.setTextOnGameInfo("You're skunk is a skunk deuce. You have to pay " +
+										Constants.DEUCE_SKUNK_PENALTY + "chips to the kitty");
 				}
 				else if(round.getDoubleSkunk())
 				{
-					gui.setTextOnGameInfo("You're skunk is a double skunk. You have to pay 4 chips to the kitty and lose all your points!!");
+					gui.setTextOnGameInfo("You're skunk is a double skunk. You have to pay " +
+							Constants.DEUCE_SKUNK_PENALTY + " chips to the kitty and lose all your points!!");
 				}
 				round.switchTurns(isSkunk);
 				gui.setTextOnGameInfo(round.lastPlayerTurn().toString() + ", your overall score is " + round.lastPlayerTurn().getOverallScore());
@@ -87,7 +90,8 @@ public class SkunkEngine {
 	
 	private String updateScoreBoard()
 	{
-		String scores = round.chipAndOverAllRoundScore() + "\nKitty Pot: " + KittyPot.getKittyChips();
+		String scores = round.chipAndOverAllRoundScore() + "\nKitty Pot: " + KittyPot.getKittyChips() +
+				"\tRound " + roundsPassed + "/" + numRounds;
 		
 		return scores;
 	}
@@ -109,16 +113,16 @@ public class SkunkEngine {
 			
 			round.resetRound();
 			KittyPot.clearKittyPot();
+			displayed = false;
 			
 			
-			if(!(roundsPassed == numRounds - 1))
+			if(!(roundsPassed == numRounds))
 			{
 				gui.setTextOnGameInfo("STARTING NEW ROUND!");
 				gui.setTextOnGameInfo("");
 				gui.setTextOnGameInfo("");
 				gui.setTextOnGameInfo("");
 				gui.setTextOnGameInfo(round.getPlayerTurnName() + " Do you want to roll?");
-				gui.updateTextOnScoreBoard(updateScoreBoard());
 			}
 			else
 			{
@@ -128,9 +132,10 @@ public class SkunkEngine {
 				gui.setTextOnGameInfo("ROUNDS DONE DETERMINING GAME WINNER");
 				gameWinner = round.determineGameWinner();
 				gui.setTextOnGameInfo(gameWinner.toString() + " IS THE WINNER!! WITH CHIP SCORE OF " + gameWinner.getChipScore());
-				gui.updateTextOnScoreBoard(updateScoreBoard());
+				return;				
 			}
 			roundsPassed = roundsPassed + 1;
+			gui.updateTextOnScoreBoard(updateScoreBoard());
 			
 			
 		}
