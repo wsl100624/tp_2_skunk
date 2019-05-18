@@ -9,7 +9,15 @@ class Roll
 	{
 		dice = new Dice(predictable);
 	}
-
+	
+	Roll(int[] pred1, int[] pred2)
+	{
+		Die die1 = new Die(pred1);
+		Die die2 = new Die(pred2);
+		
+		dice = new Dice(die1, die2);
+	}
+	
 	Roll()
 	{
 		dice = new Dice();

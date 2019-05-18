@@ -56,6 +56,11 @@ public class Turn
 	Turn(int[] predictableRolls) {
 		roll = new Roll(predictableRolls);
 	}
+	
+	Turn(int[] pred1, int[] pred2)
+	{
+		roll = new Roll(pred1, pred2);
+	}
 
 	public void resetTurn()
 	{

@@ -17,10 +17,6 @@ public class RoundTest {
         assertEquals(0, round.getTurnTracker());
     }
 
-    @Test
-    public void getKittyPot() {
-        assertEquals(0, Round.getKittyPot());
-    }
 
     @Test
     public void isRoundComplete() {
@@ -58,20 +54,38 @@ public class RoundTest {
 
     @Test
     public void singleSkunk() {
-        round.singleSkunk();
-        assertEquals(1, Round.getKittyPot());
+        int sknkDie1[] = {1,2};
+    	int sknkDie2[] = {3,2};
+    	
+    	round = new Round(sknkDie1, sknkDie2);
+    	round.addPlayer("player1");
+    	round.roundPlay();
+        round.getSkunkDeuce();
+        assertEquals(true, round.getSingleSkunk());
+
     }
 
     @Test
     public void skunkDeuce() {
-        round.skunkDeuce();
-        assertEquals(2, Round.getKittyPot());
+    	int sknkDie1[] = {1,2};
+    	int sknkDie2[] = {2,2};
+    	
+    	round = new Round(sknkDie1, sknkDie2);
+    	round.addPlayer("player1");
+    	round.roundPlay();
+        round.getSkunkDeuce();
+        assertEquals(true, round.getSkunkDeuce());
     }
 
     @Test
     public void doubleSkunk() {
-        round.doubleSkunk();
-        assertEquals(4, Round.getKittyPot());
+        int sknkDie1[] = {1,2};
+    	int sknkDie2[] = {1,2};
+    	
+    	round = new Round(sknkDie1, sknkDie2);
+    	round.addPlayer("player1");
+    	round.roundPlay();       
+        assertEquals(true, round.getDoubleSkunk());
     }
 
     @Test
@@ -80,4 +94,24 @@ public class RoundTest {
 
         round.checkForPotentialWinner();
     }
+    
+    @Test
+    public void checkGetDice()
+    {
+    	round.getSingleSkunk();
+        int sknkDie1[] = {1,2};
+    	int sknkDie2[] = {7,2};
+    	int die1,die2;
+    	
+    	round = new Round(sknkDie1, sknkDie2);
+    	round.addPlayer("player1");
+    	round.roundPlay();
+    	die1 = round.getDie1();
+    	die2 = round.getDie2();
+        assertEquals(1, die1);
+        assertEquals(7, die2);
+        assertEquals(die1+die2, round.getCurrRoll());
+    }
+        
+    
 }

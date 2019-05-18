@@ -50,6 +50,20 @@ public class Round {
 		turn = new Turn();
 		turnTracker = 0;
 	}
+	
+	public Round(int[] predictDice)
+	{
+		kittyPot = new KittyPot();
+		turn = new Turn(predictDice);
+		turnTracker = 0;
+	}
+	
+	public Round(int[] predict1, int[] predict2)
+	{
+		kittyPot = new KittyPot();
+		turn = new Turn(predict1, predict2);
+		turnTracker = 0;
+	}
 
 	int getTurnTracker() {
 		return turnTracker;
