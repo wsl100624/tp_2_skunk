@@ -1,11 +1,9 @@
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.jupiter.api.RepeatedTest;
 
 
 import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -131,8 +129,8 @@ public class RoundTest {
     
     @Test
     public void resetKitty() { 
-    	round.resetKitty();
-    	assertEquals(0,round.getKittyPot());
+    	KittyPot.clearKittyPot();;
+    	assertEquals(0,KittyPot.getKittyChips());
     }
     
     @Test
