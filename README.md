@@ -6,6 +6,7 @@
     ![](SkunkAppUML.png)
 
 -- UML (After):
+    ![](UML-after.png)
 
 -- Refactoring:
      1. Low coupling 
