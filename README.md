@@ -8,11 +8,7 @@
    ![UML-before](SkunkAppUML.png)
 
 ## UML (After)   
-   ![UML-after](UML-after.png) {
-  width: 70%;
-  border: none;
-  background: none;
-}
+   ![UML-after](UML-after.png) 
 
 ## Refactoring
      1. Low coupling 
