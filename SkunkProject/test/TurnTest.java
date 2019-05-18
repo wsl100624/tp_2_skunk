@@ -39,6 +39,6 @@ public class TurnTest {
         int overallScore = player.getOverallScore();
         turn.endTurn(isDoubleSkunk);
         assertEquals(0, overallScore);
-
+        
     }
 }

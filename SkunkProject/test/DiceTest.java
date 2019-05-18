@@ -64,10 +64,7 @@ public class DiceTest {
 		assertEquals("The result of a dice with 3 times of rolling is not 6", 6, dice.getLastRoll());
 	}
 	
-	@Test(expected = RuntimeException.class)
-	public void testInitializationOfDiceWithNullPredictableRolls() {
-		Dice predictableDice = new Dice(null);
-	}
+	
 	
 
 }

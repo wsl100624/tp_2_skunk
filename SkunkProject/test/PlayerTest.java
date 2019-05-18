@@ -14,6 +14,12 @@ public class PlayerTest {
     }
 
     @Test
+    public void setChipScore() {
+    	player.setChipScore(150);
+    	assertEquals(200,player.getChipScore());
+    }
+    
+    @Test
     public void getChipScore() {
         assertEquals(50, player.getChipScore());
     }
@@ -79,4 +85,19 @@ public class PlayerTest {
         assertEquals(50,player.getChipScore());
 
     }
+    
+    @Test
+    public void resetPlayer() {
+    	player.resetPlayer();
+    	assertEquals(0, player.getOverallScore());
+    	assertEquals(0, player.getRollScore());
+    	assertEquals(0, player.getTurnScore());
+    }
+    
+    @Test
+    public void showScore() {
+    	player.showScores();
+    }
+        
+    
 }

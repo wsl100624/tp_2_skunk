@@ -43,31 +43,23 @@ class Roll
 	
 	boolean isSkunk()
 	{		
-		if( (getCurrRollDie1() == 1 && getCurrRollDie2() > 2) )
+		boolean result=false;
+		
+		if( (getCurrRollDie1() == 1 && getCurrRollDie2() > 2) ||  (getCurrRollDie2() == 1 && getCurrRollDie1() > 2))
 		{
-			return true;
+			result=true;
 		}
 		
-		if( (getCurrRollDie2() == 1 && getCurrRollDie1() > 2) )
-		{
-			return true;
-		}
-		
-		return false;
+		return result;
 	}
 	
 	boolean isSkunkDeuce()
 	{		
-		if( (getCurrRollDie1() == 1 && getCurrRollDie2() == 2) )
+		if( (getCurrRollDie1() == 1 && getCurrRollDie2() == 2) || (getCurrRollDie2() == 1 && getCurrRollDie1() == 2) )
 		{
 			return true;
 		}
 
-		if( (getCurrRollDie2() == 1 && getCurrRollDie1() == 2) )
-		{
-			return true;
-		}
-		
 		return false;
 	}
 	
