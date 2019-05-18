@@ -11,15 +11,15 @@ public class KittyPot {
 	}
 	
 	static void addOneChip() {
-		kittyChips += 1;
+		kittyChips += Constants.SINGLE_SKUNK_PENALTY;
 	}
 	
 	static void addTwoChips() {
-		kittyChips += 2;
+		kittyChips += Constants.DEUCE_SKUNK_PENALTY;
 	}
 	
 	static void addFourChips() {
-		kittyChips += 4;
+		kittyChips += Constants.DOUBLE_SKUNK_PENALTY;
 	}
 	
 	static void clearKittyPot() {

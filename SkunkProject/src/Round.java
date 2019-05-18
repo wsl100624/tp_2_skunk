@@ -117,28 +117,9 @@ public class Round {
 		return playerList.get(turnTracker).toString();
 	}
 	
-//	public static void singleSkunk()
-//	{
-//		kittyPot = kittyPot + 1;
-//	}
-//	
-//	public static void skunkDeuce()
-//	{
-//		kittyPot = kittyPot + 2;
-//	}
-//	
-//	public static void doubleSkunk()
-//	{
-//		kittyPot = kittyPot + 4;
-//	}
-//	public static void resetKitty()
-//	{
-//		kittyPot = 0;
-//	}
-	
 	public boolean checkForPotentialWinner()
 	{
-		if(playerList.get(turnTracker).getOverallScore() >= 100)
+		if(playerList.get(turnTracker).getOverallScore() >= Constants.SCORE_FOR_THE_WIN) //Refactor 2nd - make all the constants to a separate class to acheive 'High Cohesion'
 		{
 			firstPotentialWinner = playerList.get(turnTracker);
 			potentialWinner = firstPotentialWinner;

@@ -130,17 +130,17 @@ public class Turn
 				StdOut.println("You got a skunk! Your turn is ending!");
 				if(singleSkunk)
 				{
-					StdOut.println("You're skunk is a single skunk. You have to pay 1 chip to the kitty");
+					StdOut.println("You're skunk is a single skunk. You have to pay " + Constants.SINGLE_SKUNK_PENALTY + " chip to the kitty");
 					this.player.paySingleSkunk();
 				}
 				else if(skunkDeuce)
 				{
-					StdOut.println("You're skunk is a skunk deuce. You have to pay 2 chips to the kitty");
+					StdOut.println("You're skunk is a skunk deuce. You have to pay " + Constants.DEUCE_SKUNK_PENALTY + " chips to the kitty");
 					this.player.paySkunkDeuce();
 				}
 				else if(doubleSkunk)
 				{
-					StdOut.println("You're skunk is a double skunk. You have to pay 4 chips to the kitty and lose all your points!!");
+					StdOut.println("You're skunk is a double skunk. You have to pay " + Constants.DOUBLE_SKUNK_PENALTY + " chips to the kitty and lose all your points!!");
 					this.player.payDoubleSkunk();
 				}
 			}
