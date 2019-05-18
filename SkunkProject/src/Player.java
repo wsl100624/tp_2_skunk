@@ -62,15 +62,6 @@ public class Player
 		this.chipScore = Constants.PLAYER_START_CHIPS; //Refactor 2nd - make all the constants to a separate class to acheive 'High Cohesion'
 	}
 	
-	public void showScores()
-	{
-		StdOut.println(this.toString() + "'s score is: ");
-		StdOut.println("\tchip score: " + this.chipScore);
-		StdOut.println("\troll score: " + this.rollScore);
-		StdOut.println("\tturn score: " + this.turnScore);
-		StdOut.println("\tOverall score: " + this.overallScore);
-	}
-	
 	void paySingleSkunk()
 	{
 		this.chipScore = this.chipScore - Constants.SINGLE_SKUNK_PENALTY;

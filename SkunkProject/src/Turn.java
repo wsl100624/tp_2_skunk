@@ -20,26 +20,13 @@ public class Turn
 		return singleSkunk;
 	}
 
-	public void setSingleSkunk(boolean singleSkunk) {
-		this.singleSkunk = singleSkunk;
-	}
-
 	public boolean isSkunkDeuce() {
 		return skunkDeuce;
-	}
-
-	public void setSkunkDeuce(boolean skunkDeuce) {
-		this.skunkDeuce = skunkDeuce;
 	}
 
 	public boolean isDoubleSkunk() {
 		return doubleSkunk;
 	}
-
-	public void setDoubleSkunk(boolean doubleSkunk) {
-		this.doubleSkunk = doubleSkunk;
-	}
-
 
 	private int count = 0;
 	

@@ -157,14 +157,6 @@ public class Round {
 		return playerList.get(turnTracker - 1);
 	}
 	
-	public void listOutPlayers()
-	{
-		for(Player p: playerList)
-		{
-			StdOut.println(p.toString());
-		}
-	}
-	
 	public Player getPlayerTurn()
 	{
 		return playerList.get(turnTracker);
@@ -207,13 +199,6 @@ public class Round {
 		resetPlayers();		
 	}
 	
-	public void displayScores()
-	{
-		for (Player player : playerList)
-		{
-			player.showScores();
-		}
-	}
 	
 	public String chipAndOverAllRoundScore()
 	{

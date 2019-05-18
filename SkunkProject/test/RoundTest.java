@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import edu.princeton.cs.introcs.StdOut;
 
 import static org.junit.Assert.*;
 
@@ -88,6 +89,7 @@ public class RoundTest {
     	round.addPlayer("player1");
     	round.roundPlay();
         round.getSkunkDeuce();
+        round.switchTurns(true);
         assertEquals(true, round.getSingleSkunk());
 
     }
@@ -101,17 +103,18 @@ public class RoundTest {
     	round.addPlayer("player1");
     	round.roundPlay();
         round.getSkunkDeuce();
+        round.switchTurns(true);
         assertEquals(true, round.getSkunkDeuce());
     }
 
     @Test
     public void doubleSkunk() {
-        int sknkDie1[] = {1,2};
-    	int sknkDie2[] = {1,2};
+        int sknkDice1[] = {1,2};
     	
-    	round = new Round(sknkDie1, sknkDie2);
+    	round = new Round(sknkDice1);
     	round.addPlayer("player1");
-    	round.roundPlay();       
+    	round.roundPlay();
+    	round.switchTurns(true);
         assertEquals(true, round.getDoubleSkunk());
     }
 
@@ -134,21 +137,11 @@ public class RoundTest {
     }
     
     @Test
-    public void listPlayers() {
-    	round.listOutPlayers();
-    }
-    
-    @Test
     public void resetRound() {
     	round.resetRound();
     	assertEquals(0,round.getChipsFromOthers());
     	assertEquals(0,round.winningScore);
     	assertEquals(0,round.getTurnTracker());
-    }
-    
-    @Test
-    public void displayScore() {
-    	round.displayScores();
     }
     
     @Test
@@ -174,7 +167,6 @@ public class RoundTest {
     @Test
     public void checkGetDice()
     {
-    	round.getSingleSkunk();
         int sknkDie1[] = {1,2};
     	int sknkDie2[] = {7,2};
     	int die1,die2;
@@ -188,6 +180,125 @@ public class RoundTest {
         assertEquals(7, die2);
         assertEquals(die1+die2, round.getCurrRoll());
     }
+    
+    @Test
+    public void checkGetPlayerList()
+    {
+    	round = new Round();
+    	round.addPlayer("player1");
+    	round.addPlayer("Player2");
+    	
+    	ArrayList<Player> players = round.getPlayerList();
+    	assertEquals(2, players.size());
+    }
+    
+    @Test
+    public void testCheckForOtherWinners()
+    {
+    	int sknkDice[] = {50,2};
+    	int die1,die2;
+    	
+    	round = new Round(sknkDice);
+    	round.addPlayer("player1");
+    	round.addPlayer("Player2");
+    	
+    	round.roundPlay();
+    	assertEquals(100, round.getCurrRoll());
+    	round.switchTurns(false);
+    	round.roundPlay();
+    	round.switchTurns(false);
+    	assertEquals("player1", round.roundWinner.toString());  	  	
+    }
+    
+    @Test
+    public void testLastPlayer()
+    {
+    	int sknkDice[] = {50,2};
+    	int die1,die2;
+    	Player thisPlayer;
+    	
+    	round = new Round(sknkDice);
+    	round.addPlayer("player1");
+    	round.addPlayer("Player2");
+    	
+    	round.roundPlay();
+    	assertEquals(100, round.getCurrRoll());
+    	round.switchTurns(false);
+    	thisPlayer = round.lastPlayerTurn();
+    	
+    	assertEquals("player1", thisPlayer.toString());  	  	
+    }
+    
+    @Test
+    public void testLastPlayerIsIndex0()
+    {
+    	int sknkDice[] = {50,2};
+    	int die1,die2;
+    	Player thisPlayer;
+    	
+    	round = new Round(sknkDice);
+    	round.addPlayer("player1");
+    	round.addPlayer("Player2");
+    	
+    	round.roundPlay();
+    	assertEquals(100, round.getCurrRoll());
+    	thisPlayer = round.lastPlayerTurn();
+    	
+    	assertEquals("Player2", thisPlayer.toString());  	  	
+    }
+    
+    @Test
+    public void testChipAndOverAllRoundScore()
+    {
+    	String scores;
+    	round.addPlayer("player1");
+    	round.addPlayer("Player2");
+    	
+    	scores = round.chipAndOverAllRoundScore();
+    	assertEquals(true, (scores.contains("player1") && scores.contains("Player2")));
+    }
+    
+    @Test
+    public void testResetPlayers()
+    {
+    	int sknkDice[] = {44,2};
+    	round = new Round(sknkDice);
+    	
+    	round.addPlayer("Player1");
+    	round.addPlayer("Player2");
+    	
+    	round.roundPlay();
+    	round.switchTurns(false);
+    	assertEquals(true, round.lastPlayerTurn().getOverallScore()> 0);
+    	round.resetRound();
+    	assertEquals(0, round.lastPlayerTurn().getOverallScore());
+    }
+    
+    @Test
+    public void testCheckForOtherWinnersWithHigherSchore()
+    {
+    	int sknkDice[] = {50,52,56, 58};
+    	int die1,die2;
+    	
+    	round = new Round(sknkDice);
+    	round.addPlayer("player1");
+    	round.addPlayer("Player2");
+    	round.addPlayer("Player3");
+    	round.addPlayer("Player4");
+    	
+    	round.roundPlay();
+    	assertEquals(100, round.getCurrRoll());
+    	round.switchTurns(false);
+    	round.roundPlay();
+    	round.switchTurns(false);
+    	round.roundPlay();
+    	round.switchTurns(false);
+    	round.roundPlay();
+    	round.switchTurns(false);
+    	assertEquals("Player4", round.roundWinner.toString());  	  	
+    }
+    
+    
         
     
 }
