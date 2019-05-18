@@ -8,7 +8,7 @@ public class SkunkController
 	public SkunkController(String name)
 	{
 	}
-	
+	 
 	//class that does the PL logic
 	static boolean continueTurn(String playerName)
 	{
