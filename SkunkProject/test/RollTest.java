@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class RollTest {
 	
-	private Roll predictableRoll;
+	private Roll predictableRoll,testRoll;
 	private Roll realRoll;
 	
 	@Before

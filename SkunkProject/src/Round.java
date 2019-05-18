@@ -159,9 +159,9 @@ public class Round {
 	
 	public void listOutPlayers()
 	{
-		for(int i = 0; i < playerList.size(); i++)
+		for(Player p: playerList)
 		{
-			StdOut.println(playerList.get(i).toString());
+			StdOut.println(p.toString());
 		}
 	}
 	
