@@ -3,6 +3,7 @@
 -- Test Coverage of non-UI code: 95% in overall 
 
 -- UML (Before): 
+    ![](SkunkAppUML.png)
 
 -- UML (After):
 
