@@ -1,14 +1,16 @@
--- Group Members(github ID): Will Wang(wsl100624), Coco Zhu(zhusyx), Pengxue Her(Soujirou152).
+## Group Members(github ID)
+    Will Wang(wsl100624), Coco Zhu(zhusyx), Pengxue Her(Soujirou152).
 
--- Test Coverage of non-UI code: 95% in overall 
+## Test Coverage of non-UI code 
+    95% in overall 
 
--- UML (Before): 
+## UML (Before)
     ![](SkunkAppUML.png)
 
--- UML (After):
+## UML (After)
     ![](UML-after.png)
 
--- Refactoring:
+## Refactoring
      1. Low coupling 
             - With commit ID c429a2e671613ca607c22083e4a727bcff99fb3e
             - Made KittyPot separated from Round class
