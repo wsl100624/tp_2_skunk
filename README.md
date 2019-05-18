@@ -4,11 +4,13 @@
 ## Test Coverage of non-UI code 
     95% in overall 
 
- UML (Before)
+ ## UML (Before)
+    
     ![UML-before](SkunkAppUML.png)
 
- UML (After)
-    ![UML-after](UML-after.png)
+ ## UML (After)
+   
+   ![UML-after](UML-after.png)
 
 ## Refactoring
      1. Low coupling 
